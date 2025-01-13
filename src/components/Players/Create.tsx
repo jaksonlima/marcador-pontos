@@ -31,10 +31,16 @@ export function Create() {
   // const playerGateway = new PlayerStoreGateway(data);
 
   const onSubmit = (submitPlayer: PlayerUseForm) => {
-    // const player = Player.create(submitPlayer.name);
-    const output = createPlayerUseCase.execute({ name: "test" });
+    const player = Player.create(submitPlayer.name);
+    // const output = createPlayerUseCase.execute({ name: submitPlayer.name });
+    // console.log(containerPlayer.resolve("playerGateway").create(player));
+    // console.log(containerPlayer.resolve("playerStored").create(player));
+    // console.log(containerPlayer.resolve("createPlayerUseCase"));
+    createPlayerUseCase.execute({ name: submitPlayer.name });
+    // console.log(
+    //   { output },
 
-    console.log({ output });
+    // );
     // playerGateway.create(player);
     // containerPlayer.resolve<PlayerGateway>("playerGateway").create(player);
     // playerGateway.create(player);
