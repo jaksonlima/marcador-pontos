@@ -16,6 +16,10 @@ export class Player {
     return new Player(id, name, startPoint);
   }
 
+  static with(id: PlayerID, name: string, points: number): Player {
+    return new Player(id, name, points);
+  }
+
   updatePoints(points: number): Player {
     this.points += points;
 

@@ -1,17 +1,8 @@
 "use client";
 
-import { Player } from "@/@core/domain/player";
-import useStore from "@/hooks/useStore";
-import { PlayerStoreGateway } from "@/@core/infra/player-store-gateway";
-import { playerStore } from "@/@core/infra/player-store-zustand";
 import { Button, Input } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import {
-  containerPlayer,
-  createPlayerUseCase,
-  playerGateway,
-} from "@/@core/infra/player-container";
-import { PlayerGateway } from "@/@core/domain/player-gateway";
+import { createPlayerUseCase } from "@/@core/infra/player-container";
 
 type PlayerUseForm = {
   name: string;
@@ -24,43 +15,14 @@ export function Create() {
     formState: { errors },
   } = useForm<PlayerUseForm>();
 
-  // const data = useStore(usePlayerStore, (state) => state);
-
-  // console.log({ data });
-
-  // const playerGateway = new PlayerStoreGateway(data);
-
   const onSubmit = (submitPlayer: PlayerUseForm) => {
-    const player = Player.create(submitPlayer.name);
-    // const output = createPlayerUseCase.execute({ name: submitPlayer.name });
-    // console.log(containerPlayer.resolve("playerGateway").create(player));
-    // console.log(containerPlayer.resolve("playerStored").create(player));
-    // console.log(containerPlayer.resolve("createPlayerUseCase"));
-    createPlayerUseCase.execute({ name: submitPlayer.name });
-    // console.log(
-    //   { output },
-
-    // );
-    // playerGateway.create(player);
-    // containerPlayer.resolve<PlayerGateway>("playerGateway").create(player);
-    // playerGateway.create(player);
-    // data?.addABear();
-    // data?.a
-    // data?.addPlayer();
-    // playerGateway.create(player);
-    // console.log(playerStore.getState().age);
-    // console.log(playerStore.getState().create(player));
-    // console.log(playerStore.getState().age);
+    const result = createPlayerUseCase.execute({ name: submitPlayer.name });
+    console.log({ result });
   };
-
-  // console.log(playerStore.getState().players);
-
-  // console.log(containerPlayer.resolve("playerStore"));
-
-  // console.log(containerPlayer.resolve<PlayerGateway>("playerGateway").create());
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <button onClick={() => {}}>delete</button>
       <div className="flex flex-col">
         <Input
           {...register("name", { required: "Nome não pode ser vazio." })}

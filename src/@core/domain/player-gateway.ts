@@ -1,9 +1,11 @@
 import { Player } from "./player";
 import { PlayerID } from "./player-id";
+import { PlayerQuery } from "./player-query";
 
 export interface PlayerGateway {
   create(player: Player): Player;
   update(player: Player): Player;
   delete(playerId: PlayerID): void;
-  find(playerId: PlayerID): Player;
+  findById(playerId: PlayerID): Player | undefined;
+  findAll(aQuery: PlayerQuery): Player[];
 }
