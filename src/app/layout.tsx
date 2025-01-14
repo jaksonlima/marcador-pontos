@@ -4,6 +4,7 @@ import { AppNextUIProvider } from "@/configuration/NextUIProvider";
 
 import "./globals.css";
 import { AppNavbar } from "@/components/Navbar";
+import { AppToastContainer } from "@/configuration/ToastContainer";
 
 const roboto = Roboto({
   weight: "700",
@@ -26,6 +27,7 @@ export default function RootLayout({
         <AppNextUIProvider>
           <AppNavbar />
           {children}
+          <AppToastContainer />
         </AppNextUIProvider>
       </body>
     </html>

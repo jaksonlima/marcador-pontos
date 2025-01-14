@@ -1,5 +1,4 @@
-import { Counter } from "@/components/Players/Counter";
-import { Create } from "@/components/Players/Create";
+import { Create } from "@/feature/Players/Create";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 export default function Home() {
@@ -8,9 +7,7 @@ export default function Home() {
       <>
         <ThemeSwitcher />
       </>
-      <>
-        <Counter />
-      </>
+
       <>
         <Create />
       </>
