@@ -3,7 +3,7 @@ import { PlayerID } from "./player-id";
 export class Player {
   private constructor(
     private readonly id: PlayerID,
-    private readonly name: string,
+    private name: string,
     private points: number
   ) {
     this.isValid();
@@ -22,6 +22,16 @@ export class Player {
 
   updatePoints(points: number): Player {
     this.points += points;
+
+    this.isValid();
+
+    return this;
+  }
+
+  updateName(name: string): Player {
+    this.name = name;
+
+    this.isValid();
 
     return this;
   }

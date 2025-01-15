@@ -8,13 +8,15 @@ export class UpdatePlayerUseCase implements UseCase<Input, Output> {
   execute(anIn: Input): Output {
     const inputId = anIn.id;
     const inputPoints = anIn.points;
+    const inputName = anIn.name;
 
     const result = this.playerGateway.findById(PlayerID.with(inputId));
 
     if (result) {
       result.updatePoints(inputPoints);
+      result.updateName(inputName);
 
-      return { id: result.getId().getValue() };
+      return { id: inputId, name: inputName };
     }
 
     throw new Error(`Not found player id: ${inputId}`);
@@ -22,9 +24,9 @@ export class UpdatePlayerUseCase implements UseCase<Input, Output> {
 }
 
 class Input {
-  constructor(public id: string, public points: number) {}
+  constructor(public id: string, public name: string, public points: number) {}
 }
 
 class Output {
-  constructor(public id: string) {}
+  constructor(public id: string, public name: string) {}
 }

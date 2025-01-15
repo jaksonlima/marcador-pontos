@@ -6,10 +6,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  User,
-  Chip,
   Tooltip,
-  ChipProps,
 } from "@nextui-org/react";
 
 import { findAllPlayerUseCase } from "@/@core/infra/player-container";
@@ -21,23 +18,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 export const columns = [
   { name: "NOME", uid: "name" },
   { name: "PONTOS", uid: "points" },
-  { name: "STATUS", uid: "status" },
   { name: "", uid: "actions" },
-];
-
-export const users = [
-  {
-    id: 2,
-    name: "Zoey Lang",
-    status: "jogando",
-    points: 23,
-  },
-  {
-    id: 21,
-    name: "Zoey Lang",
-    status: "desclassificado",
-    points: 100,
-  },
 ];
 
 export const DeleteIcon = (props: IconSvgProps) => {
@@ -131,38 +112,16 @@ export const EditIcon = (props: IconSvgProps) => {
   );
 };
 
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  jogando: "success",
-  desclassificado: "danger",
-};
-
 type Output = ReturnType<typeof findAllPlayerUseCase.execute>[0];
 
-export function PlayerTable() {
+export function List() {
   const players = findAllPlayerUseCase.execute({});
-
-  console.log({ players });
 
   const renderCell = React.useCallback(
     (player: Output, columnKey: React.Key) => {
       const cellValue = player[columnKey as keyof Output];
 
       switch (columnKey) {
-        case "status":
-          return (
-            <Chip
-              className="capitalize"
-              color={
-                statusColorMap[
-                  player.points >= 100 ? "jogando" : "desclassificado"
-                ]
-              }
-              size="sm"
-              variant="flat"
-            >
-              {cellValue}
-            </Chip>
-          );
         case "actions":
           return (
             <div className="relative flex items-center gap-2">

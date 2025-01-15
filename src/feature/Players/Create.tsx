@@ -5,9 +5,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import { createPlayerUseCase } from "@/@core/infra/player-container";
-import { PlayerTable } from "./Table";
 
-type PlayerUseForm = {
+type CreatePlayerUseForm = {
   name: string;
 };
 
@@ -16,13 +15,12 @@ export function Create() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<PlayerUseForm>();
+  } = useForm<CreatePlayerUseForm>();
 
-  const onSubmit = (submitPlayer: PlayerUseForm) => {
+  const onSubmit = (submitPlayer: CreatePlayerUseForm) => {
     const result = createPlayerUseCase.execute({ name: submitPlayer.name });
-    console.log({ result });
 
-    toast(`create player: ${result.id}`);
+    toast(`Jogador adicionado a partida: ${result.name}`);
   };
 
   return (
@@ -43,8 +41,6 @@ export function Create() {
           </Button>
         </div>
       </form>
-
-      <PlayerTable />
     </>
   );
 }

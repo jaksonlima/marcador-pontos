@@ -17,6 +17,14 @@ export class PlayerZustand {
       player.getPoints()
     );
   }
+
+  static map(players: PlayerZustand[]) {
+    return players.map((player) => PlayerZustand.create(player));
+  }
+
+  static create(players: PlayerZustand) {
+    return new PlayerZustand(players.id, players.name, players.points);
+  }
 }
 
 export interface PlayerStore {
@@ -67,14 +75,22 @@ export const playerStore = createStore<Store & PlayerStore>()(
         });
       },
       findById: (playerId: string) => {
-        return get().players.find((player) => player.id === playerId);
+        const result = get().players.find((player) => player.id === playerId);
+
+        if (result) {
+          return PlayerZustand.create(result);
+        }
       },
       findAll: (playerName?: string) => {
         if (playerName) {
-          return get().players.filter((player) => player.name === playerName);
+          const result = get().players.filter(
+            (player) => player.name === playerName
+          );
+
+          return PlayerZustand.map(result);
         }
 
-        return get().players;
+        return PlayerZustand.map(get().players);
       },
     }),
     {

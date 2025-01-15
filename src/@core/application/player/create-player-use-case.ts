@@ -12,7 +12,7 @@ export class CreatePlayerUseCase implements UseCase<Input, Output> {
 
     this.playerGateway.create(player);
 
-    return { id: player.getId().getValue() };
+    return { id: player.getId().getValue(), name: player.getName() };
   }
 }
 
@@ -21,5 +21,5 @@ class Input {
 }
 
 class Output {
-  constructor(public id: string) {}
+  constructor(public id: string, public name: string) {}
 }
