@@ -21,7 +21,7 @@ export class Player {
   }
 
   updatePoints(points: number): Player {
-    this.points += points;
+    this.points = points;
 
     this.isValid();
 

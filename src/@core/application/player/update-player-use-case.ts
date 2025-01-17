@@ -16,6 +16,8 @@ export class UpdatePlayerUseCase implements UseCase<Input, Output> {
       result.updatePoints(inputPoints);
       result.updateName(inputName);
 
+      this.playerGateway.update(result);
+
       return { id: inputId, name: inputName };
     }
 

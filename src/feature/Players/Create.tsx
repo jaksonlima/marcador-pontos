@@ -1,6 +1,5 @@
 "use client";
-
-import { Button, Input } from "@nextui-org/react";
+import { Button, Form, Input } from "@heroui/react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -25,22 +24,23 @@ export function Create() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <button onClick={() => {}}>delete</button>
-        <div className="flex flex-col">
-          <Input
-            {...register("name", { required: "Nome não pode ser vazio." })}
-            type="text"
-            label="Nome"
-            placeholder="Digite nome do jogador"
-            errorMessage={errors["name"]?.message as string}
-            isRequired
-          />
-          <Button color="primary" size="md" variant="shadow" type="submit">
-            Criar
-          </Button>
-        </div>
-      </form>
+      <Form
+        className="w-full"
+        validationBehavior="native"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <Input
+          {...register("name", { required: "Nome não pode ser vazio." })}
+          type="text"
+          label="Nome"
+          placeholder="Digite nome do jogador"
+          errorMessage={errors["name"]?.message as string}
+          isRequired
+        />
+        <Button color="primary" size="md" variant="shadow" type="submit">
+          CRIAR
+        </Button>
+      </Form>
     </>
   );
 }

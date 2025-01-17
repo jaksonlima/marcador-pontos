@@ -1,8 +1,13 @@
-import { updatePlayerUseCase } from "@/@core/infra/player-container";
-import { Button, Input } from "@nextui-org/react";
-import { useRouter } from "next/router";
+"use client";
+import { Button, Form, Input } from "@heroui/react";
+import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+
+import {
+  updatePlayerUseCase,
+  findByIdPlayerUseCase,
+} from "@/@core/infra/player-container";
 
 type UpdatePlayerUseForm = {
   name: string;
@@ -10,18 +15,23 @@ type UpdatePlayerUseForm = {
 };
 
 export function Update() {
-  const router = useRouter();
+  const params = useParams();
+  const playerId = params.id as string;
+
+  const player = findByIdPlayerUseCase.execute(playerId);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UpdatePlayerUseForm>();
+  } = useForm<UpdatePlayerUseForm>({
+    values: { name: player.name, points: player.points },
+  });
 
   const onSubmit = (submitPlayer: UpdatePlayerUseForm) => {
     try {
       const result = updatePlayerUseCase.execute({
-        id: router.query.id as string,
+        id: params.id as string,
         name: submitPlayer.name,
         points: submitPlayer.points,
       });
@@ -35,30 +45,27 @@ export function Update() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <button onClick={() => {}}>delete</button>
-        <div className="flex flex-col">
-          <Input
-            {...register("name", { required: "Nome não pode ser vazio." })}
-            type="text"
-            label="Nome"
-            placeholder="Digite nome do jogador"
-            errorMessage={errors["name"]?.message as string}
-            isRequired
-          />
-          <Input
-            {...register("points", { required: "Pontos não pode ser vazio." })}
-            type="text"
-            label="Pontos"
-            placeholder="Digite a quantidade"
-            errorMessage={errors["points"]?.message as string}
-            isRequired
-          />
-          <Button color="primary" size="md" variant="shadow" type="submit">
-            Atualizar
-          </Button>
-        </div>
-      </form>
+      <Form validationBehavior="native" onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          {...register("name", { required: "Nome não pode ser vazio." })}
+          type="text"
+          label="Nome"
+          placeholder="Digite nome do jogador"
+          errorMessage={errors["name"]?.message as string}
+          isRequired
+        />
+        <Input
+          {...register("points", { required: "Pontos não pode ser vazio." })}
+          type="number"
+          label="Pontos"
+          placeholder="Digite a quantidade"
+          errorMessage={errors["points"]?.message as string}
+          isRequired
+        />
+        <Button color="primary" size="md" variant="shadow" type="submit">
+          ATUALIZAR
+        </Button>
+      </Form>
     </>
   );
 }
