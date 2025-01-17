@@ -17,9 +17,14 @@ export function Create() {
   } = useForm<CreatePlayerUseForm>();
 
   const onSubmit = (submitPlayer: CreatePlayerUseForm) => {
-    const result = createPlayerUseCase.execute({ name: submitPlayer.name });
+    try {
+      const result = createPlayerUseCase.execute({ name: submitPlayer.name });
 
-    toast(`Jogador adicionado a partida: ${result.name}`);
+      toast(`Jogador adicionado a partida: ${result.name}`);
+    } catch (error) {
+      const errorType = error as Error;
+      toast(`Erro: ${errorType.message}`, { type: "error" });
+    }
   };
 
   return (
