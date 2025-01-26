@@ -58,7 +58,7 @@ export function Update() {
           {...register("points", { required: "Pontos não pode ser vazio." })}
           type="number"
           label="Pontos"
-          placeholder="Digite a quantidade"
+          placeholder="Digite a quantidade de pontos"
           errorMessage={errors["points"]?.message as string}
           isRequired
         />
