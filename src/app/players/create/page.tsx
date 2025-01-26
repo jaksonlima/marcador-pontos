@@ -1,11 +1,11 @@
 import { Container } from "@/feature/Players/Container";
-import { Update } from "@/feature/Players/Update";
+import { Create } from "@/feature/Players/Create";
 
 export default function Page() {
   return (
     <>
       <Container>
-        <Update />
+        <Create />
       </Container>
     </>
   );

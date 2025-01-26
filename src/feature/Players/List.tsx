@@ -9,7 +9,9 @@ import {
   TableRow,
   TableCell,
   Tooltip,
+  Button,
 } from "@heroui/react";
+import { CirclePlus } from "lucide-react";
 
 import { findAllPlayerUseCase } from "@/@core/infra/player-container";
 import { Delete } from "./Delete";
@@ -99,19 +101,32 @@ export function List() {
   );
 
   return (
-    <Table aria-label="Example table with custom cells">
-      <TableHeader columns={columns}>
-        {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
-      </TableHeader>
-      <TableBody items={players}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
-            )}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <>
+      <div className="place-items-center m-1">
+        <div className="flex flex-col items-end gap-4 w-full max-w-xl">
+          <Link href="/players/create">
+            <Button isIconOnly aria-label="Like">
+              <CirclePlus />
+            </Button>
+          </Link>
+          <Table aria-label="Example table with custom cells">
+            <TableHeader columns={columns}>
+              {(column) => (
+                <TableColumn key={column.uid}>{column.name}</TableColumn>
+              )}
+            </TableHeader>
+            <TableBody items={players}>
+              {(item) => (
+                <TableRow key={item.id}>
+                  {(columnKey) => (
+                    <TableCell>{renderCell(item, columnKey)}</TableCell>
+                  )}
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+    </>
   );
 }
