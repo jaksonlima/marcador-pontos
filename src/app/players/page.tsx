@@ -1,4 +1,3 @@
-"use client";
 import { List } from "@/feature/Players/List";
 
 export default function Page() {

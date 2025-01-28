@@ -81,7 +81,7 @@ export function List() {
             <div className="relative flex items-center gap-2">
               <Tooltip content="Editar">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <Link href={`/players/${player.id}`}>
+                  <Link href={`/players/update/${player.id}`}>
                     <EditIcon />
                   </Link>
                 </span>
