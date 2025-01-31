@@ -6,7 +6,7 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <Container>
       <Bread />
-      <main>{children}</main>
+      {children}
     </Container>
   );
 }

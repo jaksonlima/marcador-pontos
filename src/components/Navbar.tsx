@@ -6,8 +6,8 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-  Button,
 } from "@heroui/react";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export const AcmeLogo = () => {
   return (
@@ -47,13 +47,8 @@ export function AppNavbar() {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
+          <ThemeSwitcher />
         </NavbarItem>
       </NavbarContent>
     </Navbar>
