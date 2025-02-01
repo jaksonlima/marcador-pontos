@@ -1,8 +1,10 @@
 "use client";
-import { Button, Form, Input } from "@heroui/react";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { Form } from "@heroui/form";
+import { Input } from "@heroui/input";
+import { Button } from "@heroui/button";
 
 import {
   updatePlayerUseCase,

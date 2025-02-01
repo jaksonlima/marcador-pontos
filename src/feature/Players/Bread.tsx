@@ -1,5 +1,5 @@
 "use client";
-import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
+import { Breadcrumbs, BreadcrumbItem } from "@heroui/breadcrumbs";
 import { usePathname, useRouter } from "next/navigation";
 
 export function Bread() {

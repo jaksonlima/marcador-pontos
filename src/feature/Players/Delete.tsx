@@ -1,17 +1,18 @@
+"use client";
+import { PropsWithChildren } from "react";
+import { useRouter } from "next/navigation";
+import { CircleAlert, Trash2 } from "lucide-react";
+import { Button } from "@heroui/button";
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button,
   useDisclosure,
-} from "@heroui/react";
-import { CircleAlert, Trash2 } from "lucide-react";
-import { PropsWithChildren } from "react";
+} from "@heroui/modal";
 
 import { deletePlayerUseCase } from "@/@core/infra/player-container";
-import { useRouter } from "next/navigation";
 
 interface DeleteProps extends PropsWithChildren {
   id: string;

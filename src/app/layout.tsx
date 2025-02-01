@@ -1,9 +1,10 @@
+import "@/styles/globals.css";
+
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import { AppNextUIProvider } from "@/configuration/NextUIProvider";
 
-import "./globals.css";
 import { AppNavbar } from "@/components/Navbar";
+import { AppNextUIProvider } from "@/configuration/NextUIProvider";
 import { AppToastContainer } from "@/configuration/ToastContainer";
 
 const roboto = Roboto({
@@ -26,8 +27,8 @@ export default function RootLayout({
       <body className={`${roboto.className} antialiased`}>
         <AppNextUIProvider>
           <AppNavbar />
-          {children}
           <AppToastContainer />
+          {children}
         </AppNextUIProvider>
       </body>
     </html>

@@ -1,5 +1,8 @@
 "use client";
-import { Button, Form, Input } from "@heroui/react";
+import { Button } from "@heroui/button";
+import { Form } from "@heroui/form";
+import { Input } from "@heroui/input";
+
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
