@@ -1,24 +1,30 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-type Points = {
-  isFocused: boolean;
-  onValue: (v: number) => void;
+type PointsProps = {
+  isFocused?: boolean;
+  onChange?: (v: number) => void;
 };
 
-export function Points() {
+export function Points({ isFocused, onChange }: PointsProps) {
   const { register, setFocus, watch } = useForm({
     defaultValues: { points: 0 },
   });
 
+  useEffect(() => {
+    onChange?.(watch("points"));
+  }, [onChange, watch, watch("points")]);
+
+  useEffect(() => {
+    if (isFocused) {
+      setFocus("points");
+    }
+  }, [isFocused, setFocus]);
+
+  console.log(isFocused);
+
   return (
-    <div onClick={() => setFocus("points")}>
-      <span
-        className={`text-2xl font-bold cursor-pointer ${
-          true && "text-green-500"
-        }`}
-      >
-        {watch("points")}
-      </span>
+    <>
       <div className="relative">
         <input
           {...register("points")}
@@ -26,6 +32,6 @@ export function Points() {
           className="opacity-0 inset-0 absolute"
         />
       </div>
-    </div>
+    </>
   );
 }
