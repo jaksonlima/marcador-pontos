@@ -50,15 +50,15 @@ export class Player {
 
   private isValid() {
     if (!this.id) {
-      throw new Error(`ID should not be null`);
+      throw new Error(`ID não deve ser nulo`);
     }
 
     if (!this.name) {
-      throw new Error(`Name should not be null`);
+      throw new Error(`O nome não deve ser nulo`);
     }
 
     if (this.points < 0) {
-      throw new Error(`Points cannot be less than zero`);
+      throw new Error(`Os pontos não podem ser menores que zero`);
     }
   }
 }

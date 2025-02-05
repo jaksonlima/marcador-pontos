@@ -1,37 +1,48 @@
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useCallback } from "react";
+import { useFormContext } from "react-hook-form";
+import debounce from "lodash.debounce";
+import { toast } from "react-toastify";
 
-type PointsProps = {
-  isFocused?: boolean;
-  onChange?: (v: number) => void;
-};
+import { CardFormProps } from "./Card";
+import { updatePlayerUseCase } from "@/@core/infra/player-container";
 
-export function Points({ isFocused, onChange }: PointsProps) {
-  const { register, setFocus, watch } = useForm({
-    defaultValues: { points: 0 },
-  });
+export function Points() {
+  const { register, getValues } = useFormContext<CardFormProps>();
 
-  useEffect(() => {
-    onChange?.(watch("points"));
-  }, [onChange, watch, watch("points")]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleChange = useCallback(
+    debounce(() => {
+      updatePlayer();
+    }, 600),
+    []
+  );
 
-  useEffect(() => {
-    if (isFocused) {
-      setFocus("points");
+  function updatePlayer() {
+    try {
+      const name = getValues("name");
+
+      updatePlayerUseCase.execute({
+        id: getValues("id"),
+        points: getValues("points"),
+        name: name,
+      });
+
+      toast(`${name}: Ponto atualizado`);
+    } catch (error) {
+      const errorType = error as Error;
+      toast(`Erro: ${errorType.message}`, { type: "error" });
     }
-  }, [isFocused, setFocus]);
-
-  console.log(isFocused);
+  }
 
   return (
-    <>
-      <div className="relative">
-        <input
-          {...register("points")}
-          type="text"
-          className="opacity-0 inset-0 absolute"
-        />
-      </div>
-    </>
+    <div className="relative">
+      <input
+        {...register("points", {
+          onChange: handleChange,
+        })}
+        type="text"
+        className="opacity-0 inset-0 absolute "
+      />
+    </div>
   );
 }

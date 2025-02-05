@@ -21,7 +21,7 @@ export class UpdatePlayerUseCase implements UseCase<Input, Output> {
       return { id: inputId, name: inputName };
     }
 
-    throw new Error(`Not found player id: ${inputId}`);
+    throw new Error(`Jogador não encontrado id: ${inputId}`);
   }
 }
 

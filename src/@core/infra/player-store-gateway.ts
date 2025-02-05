@@ -33,7 +33,6 @@ export class PlayerStoreGateway implements PlayerGateway {
     const result = this.playerStore.findAll(aQuery.name);
 
     if (result) {
-      console.log({ result });
       return result.map((player) => player.toAggregate());
     }
 

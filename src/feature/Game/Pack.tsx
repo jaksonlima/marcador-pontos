@@ -1,13 +1,18 @@
+import { PropsWithChildren, useState } from "react";
 import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
-import { Heart, Star } from "lucide-react";
-import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
-interface PackProps {
-  name: string;
-  points: number;
+import { CardFormProps } from "./Card";
+
+export function PackRoot() {
+  return (
+    <Pack>
+      <PackItem />
+    </Pack>
+  );
 }
 
-export function Pack({ name, points }: PackProps) {
+function Pack({ children }: PropsWithChildren) {
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const [shadow, setShadow] = useState("0 0 20px rgba(0, 0, 0, 0.2)");
 
@@ -31,38 +36,47 @@ export function Pack({ name, points }: PackProps) {
   };
 
   return (
-    <>
-      <div
-        className="rounded-2xl cursor-pointer"
-        style={{
-          transform: `perspective(800px) rotateX(${rotate.y}deg) rotateY(${rotate.x}deg)`,
-          boxShadow: shadow,
-        }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={resetRotation}
-      >
-        <div className="border-1 border-yellow-500 rounded-2xl shadow-[0_0_5px_#FFD700]">
-          <Card className="max-w-[14rem] max-h-[20rem] w-56 h-80">
-            <CardHeader className="flex flex-col items-start">
-              <span className={`text-2xl font-bold cursor-pointer`}>
-                {points}
-              </span>
-              <Heart color="#ff0000" strokeWidth={3} />
-            </CardHeader>
-            <CardBody className="text-center justify-center text-3xl font-extrabold ">
-              {name}
-            </CardBody>
-            <CardFooter className="flex flex-col items-end rotate-180 scale-x-[-1]">
-              <div className="flex flex-col items-center">
-                <span className={`text-2xl font-bold cursor-pointer`}>
-                  {points}
-                </span>
-                <Star color="#ff0000" strokeWidth={3} />
-              </div>
-            </CardFooter>
-          </Card>
-        </div>
+    <div
+      className="rounded-2xl cursor-pointer"
+      style={{
+        transform: `perspective(800px) rotateX(${rotate.y}deg) rotateY(${rotate.x}deg)`,
+        boxShadow: shadow,
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={resetRotation}
+    >
+      <div className="border-1 border-yellow-500 rounded-2xl shadow-[0_0_5px_#FFD700]">
+        {children}
       </div>
-    </>
+    </div>
+  );
+}
+
+function PackItem() {
+  const { watch } = useFormContext<CardFormProps>();
+
+  const [name, points] = watch(["name", "points"]);
+
+  return (
+    <Card
+      className={`
+      max-w-[14rem] max-h-[20rem] w-56 h-80 
+      bg-[url('/background-playing.webp')] bg-cover bg-center !bg-black bg-opacity-50
+    `}
+    >
+      <CardHeader>
+        <span className="text-3xl font-bold text-white cursor-pointer">
+          {points}
+        </span>
+      </CardHeader>
+      <CardBody className="text-center justify-center">
+        <span className="text-4xl font-extrabold text-white">{name}</span>
+      </CardBody>
+      <CardFooter className="flex flex-col items-end rotate-180 scale-x-[-1]">
+        <span className="text-3xl font-bold text-white cursor-pointer">
+          {points}
+        </span>
+      </CardFooter>
+    </Card>
   );
 }
