@@ -27,7 +27,7 @@ export function Points() {
         name: name,
       });
 
-      toast(`${name}: Ponto atualizado`);
+      toast(`${name}: Pontos atualizados`);
     } catch (error) {
       const errorType = error as Error;
       toast(`Erro: ${errorType.message}`, { type: "error" });
@@ -41,7 +41,7 @@ export function Points() {
           onChange: handleChange,
         })}
         type="text"
-        className="opacity-0 inset-0 absolute "
+        className="opacity-0 inset-0 absolute"
       />
     </div>
   );

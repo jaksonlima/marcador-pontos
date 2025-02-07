@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
 import { useFormContext } from "react-hook-form";
 
@@ -53,30 +53,42 @@ function Pack({ children }: PropsWithChildren) {
 }
 
 function PackItem() {
-  const { watch } = useFormContext<CardFormProps>();
+  const [focus, set] = useState(false);
+  const { watch, setFocus } = useFormContext<CardFormProps>();
 
   const [name, points] = watch(["name", "points"]);
 
+  const focusStyle = `text-3xl font-bold text-white cursor-pointer ${
+    focus && "text-glow-blue"
+  }`;
+
+  const handleFocus = () => {
+    console.log("A div ganhou o foco!", { name });
+    set(true);
+  };
+  const handleBlur = () => {
+    console.log("A div perdeu o foco!", { name });
+    set(false);
+  };
+
   return (
-    <Card
-      className={`
-      max-w-[14rem] max-h-[20rem] w-56 h-80 
-      bg-[url('/background-playing.webp')] bg-cover bg-center !bg-black bg-opacity-50
-    `}
-    >
-      <CardHeader>
-        <span className="text-3xl font-bold text-white cursor-pointer">
-          {points}
-        </span>
-      </CardHeader>
-      <CardBody className="text-center justify-center">
-        <span className="text-4xl font-extrabold text-white">{name}</span>
-      </CardBody>
-      <CardFooter className="flex flex-col items-end rotate-180 scale-x-[-1]">
-        <span className="text-3xl font-bold text-white cursor-pointer">
-          {points}
-        </span>
-      </CardFooter>
-    </Card>
+    <div tabIndex={0} onClick={handleFocus} onBlur={handleBlur}>
+      <Card
+        className={`
+        max-w-[14rem] max-h-[20rem] w-56 h-80 
+        bg-[url('/background-playing.webp')] bg-cover bg-center !bg-black bg-opacity-50
+        `}
+      >
+        <CardHeader>
+          <span className={focusStyle}>{points}</span>
+        </CardHeader>
+        <CardBody className="text-center justify-center">
+          <span className="text-4xl font-extrabold text-white">{name}</span>
+        </CardBody>
+        <CardFooter className="flex flex-col items-end rotate-180 scale-x-[-1]">
+          <span className={focusStyle}>{points}</span>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

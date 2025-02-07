@@ -23,10 +23,8 @@ export function Card({ id, name, points }: CardProps) {
 
   return (
     <FormProvider {...methods}>
-      <div onFocus={() => methods.setFocus("points")}>
-        <PackRoot />
-        <Points />
-      </div>
+      <PackRoot />
+      <Points />
     </FormProvider>
   );
 }
