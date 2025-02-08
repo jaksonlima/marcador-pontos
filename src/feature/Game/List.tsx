@@ -9,12 +9,7 @@ export function List() {
   return (
     <>
       {players.map((player) => (
-        <CardRoot
-          key={player.id}
-          id={player.id}
-          name={player.name}
-          points={player.points}
-        />
+        <CardRoot key={player.id} {...player} />
       ))}
     </>
   );

@@ -4,6 +4,17 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import debounce from "lodash.debounce";
 
+// import React from "react";
+// import {
+//   Drawer,
+//   DrawerContent,
+//   DrawerHeader,
+//   DrawerBody,
+//   DrawerFooter,
+// } from "@heroui/drawer";
+// import { Button } from "@heroui/button";
+// import { useDisclosure } from "@heroui/use-disclosure";
+
 import { updatePlayerUseCase } from "@/@core/infra/player-container";
 
 type CardProps = {
@@ -59,41 +70,45 @@ export function Card(player: CardProps) {
   };
 
   return (
-    <div
-      tabIndex={0}
-      onClick={() => {
-        setFocus("points");
-        set(true);
-      }}
-    >
-      <div className="relative">
-        <input
-          {...register("points", {
-            onChange: handleChange,
-            onBlur: handleBlur,
-          })}
-          type="text"
-          className="opacity-0 inset-0 absolute"
-        />
-      </div>
+    <>
+      {/* <CardInputMobile open={true} /> */}
 
-      <CardUI
-        className={`max-w-[14rem] max-h-[20rem] w-56 h-80 
-            bg-[url('/background-playing.webp')] bg-cover bg-center !bg-black bg-opacity-50`}
+      <div
+        tabIndex={0}
+        onClick={() => {
+          setFocus("points");
+          set(true);
+        }}
       >
-        <CardHeader>
-          <span className={focusStyle}>{points}</span>
-        </CardHeader>
-        <CardBody className="text-center justify-center">
-          <span className="text-4xl font-extrabold text-white">
-            {player.name}
-          </span>
-        </CardBody>
-        <CardFooter className="flex flex-col items-end rotate-180 scale-x-[-1]">
-          <span className={focusStyle}>{points}</span>
-        </CardFooter>
-      </CardUI>
-    </div>
+        <div className="relative">
+          <input
+            {...register("points", {
+              onChange: handleChange,
+              onBlur: handleBlur,
+            })}
+            type="text"
+            className="opacity-0 inset-0 absolute"
+          />
+        </div>
+
+        <CardUI
+          className={`max-w-[14rem] max-h-[20rem] w-56 h-80 
+            bg-[url('/background-playing.webp')] bg-cover bg-center !bg-black bg-opacity-50`}
+        >
+          <CardHeader>
+            <span className={focusStyle}>{points}</span>
+          </CardHeader>
+          <CardBody className="text-center justify-center">
+            <span className="text-4xl font-extrabold text-white">
+              {player.name}
+            </span>
+          </CardBody>
+          <CardFooter className="flex flex-col items-end rotate-180 scale-x-[-1]">
+            <span className={focusStyle}>{points}</span>
+          </CardFooter>
+        </CardUI>
+      </div>
+    </>
   );
 }
 
@@ -144,3 +159,50 @@ export function CardRoot(player: CardProps) {
     </CardBorder>
   );
 }
+
+// function CardInputMobile({ open }: { open: boolean }) {
+//   console.log({ open });
+//   const { isOpen, onOpen, onOpenChange } = useDisclosure({ isOpen: open });
+
+//   return (
+//     <>
+//       <Drawer
+//         isOpen={isOpen}
+//         placement="bottom"
+//         backdrop="transparent"
+//         onOpenChange={onOpenChange}
+//       >
+//         <DrawerContent>
+//           {(onClose) => (
+//             <>
+//               <DrawerHeader className="flex flex-col gap-1">
+//                 Drawer Title
+//               </DrawerHeader>
+//               <DrawerBody>
+//                 <p>
+//                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+//                   Nullam pulvinar risus non risus hendrerit venenatis.
+//                   Pellentesque sit amet hendrerit risus, sed porttitor quam.
+//                 </p>
+//                 <p>
+//                   Magna exercitation reprehenderit magna aute tempor cupidatat
+//                   consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
+//                   incididunt cillum quis. Velit duis sit officia eiusmod Lorem
+//                   aliqua enim laboris do dolor eiusmod.
+//                 </p>
+//               </DrawerBody>
+//               <DrawerFooter>
+//                 <Button color="danger" variant="light" onPress={onClose}>
+//                   Close
+//                 </Button>
+//                 <Button color="primary" onPress={onClose}>
+//                   Action
+//                 </Button>
+//               </DrawerFooter>
+//             </>
+//           )}
+//         </DrawerContent>
+//       </Drawer>
+//     </>
+//   );
+// }
