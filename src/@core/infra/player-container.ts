@@ -11,7 +11,7 @@ import { FindAllPlayerUseCase } from "../application/player/find-all-player-use-
 const container = createContainer();
 
 container.register({
-  playerStored: asValue(playerStore.getState()),
+  playerStore: asValue(playerStore.getState()),
   playerGateway: asClass(PlayerStoreGateway).singleton().classic(),
   createPlayerUseCase: asClass(CreatePlayerUseCase).singleton().classic(),
   updatePlayerUseCase: asClass(UpdatePlayerUseCase).singleton().classic(),
