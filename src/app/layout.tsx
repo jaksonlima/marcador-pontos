@@ -6,6 +6,7 @@ import { Roboto } from "next/font/google";
 import { AppNavbar } from "@/components/Navbar";
 import { AppNextUIProvider } from "@/configuration/NextUIProvider";
 import { AppToastContainer } from "@/configuration/ToastContainer";
+import { UseCaseProvider } from "@/hooks/provider-use-case";
 
 const roboto = Roboto({
   weight: "700",
@@ -13,7 +14,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Oito Louco V2",
+  title: "Marcador de Pontos - Jogo",
   description: "Created By Jakson Lima",
 };
 
@@ -28,7 +29,7 @@ export default function RootLayout({
         <AppNextUIProvider>
           <AppNavbar />
           <AppToastContainer />
-          {children}
+          <UseCaseProvider>{children}</UseCaseProvider>
         </AppNextUIProvider>
       </body>
     </html>

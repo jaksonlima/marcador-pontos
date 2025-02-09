@@ -1,4 +1,5 @@
 import { createContainer, asValue, asClass } from "awilix";
+
 import { playerStore } from "./player-store-zustand";
 import { PlayerStoreGateway } from "./player-store-gateway";
 import { CreatePlayerUseCase } from "../application/player/create-player-use-case";
@@ -7,10 +8,10 @@ import { UpdatePlayerUseCase } from "../application/player/update-player-use-cas
 import { FindByIdPlayerUseCase } from "../application/player/find-by-id-player-use-case";
 import { FindAllPlayerUseCase } from "../application/player/find-all-player-use-case";
 
-const containerPlayer = createContainer();
+const container = createContainer();
 
-containerPlayer.register({
-  playerStore: asValue(playerStore.getState()),
+container.register({
+  playerStored: asValue(playerStore.getState()),
   playerGateway: asClass(PlayerStoreGateway).singleton().classic(),
   createPlayerUseCase: asClass(CreatePlayerUseCase).singleton().classic(),
   updatePlayerUseCase: asClass(UpdatePlayerUseCase).singleton().classic(),
@@ -19,20 +20,22 @@ containerPlayer.register({
   findAllPlayerUseCase: asClass(FindAllPlayerUseCase).singleton().classic(),
 });
 
-export const createPlayerUseCase = containerPlayer.resolve<CreatePlayerUseCase>(
+export const createPlayerUseCase = container.resolve<CreatePlayerUseCase>(
   "createPlayerUseCase"
 );
 
-export const updatePlayerUseCase = containerPlayer.resolve<UpdatePlayerUseCase>(
+export const updatePlayerUseCase = container.resolve<UpdatePlayerUseCase>(
   "updatePlayerUseCase"
 );
 
-export const deletePlayerUseCase = containerPlayer.resolve<DeletePlayerUseCase>(
+export const deletePlayerUseCase = container.resolve<DeletePlayerUseCase>(
   "deletePlayerUseCase"
 );
 
-export const findByIdPlayerUseCase =
-  containerPlayer.resolve<FindByIdPlayerUseCase>("findByIdPlayerUseCase");
+export const findByIdPlayerUseCase = container.resolve<FindByIdPlayerUseCase>(
+  "findByIdPlayerUseCase"
+);
 
-export const findAllPlayerUseCase =
-  containerPlayer.resolve<FindAllPlayerUseCase>("findAllPlayerUseCase");
+export const findAllPlayerUseCase = container.resolve<FindAllPlayerUseCase>(
+  "findAllPlayerUseCase"
+);

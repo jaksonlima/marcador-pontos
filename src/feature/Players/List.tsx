@@ -13,8 +13,8 @@ import {
   TableCell,
 } from "@heroui/table";
 
-import { findAllPlayerUseCase } from "@/@core/infra/player-container";
 import { Delete } from "./Delete";
+import { usePlayerUseCase } from "@/hooks/player-use-case";
 
 export const columns = [
   { name: "NOME", uid: "name" },
@@ -22,10 +22,11 @@ export const columns = [
   { name: "", uid: "actions" },
 ];
 
-type Output = ReturnType<typeof findAllPlayerUseCase.execute>[0];
-
 export function List() {
+  const { findAllPlayerUseCase } = usePlayerUseCase();
   const players = findAllPlayerUseCase.execute({});
+
+  type Output = ReturnType<typeof findAllPlayerUseCase.execute>[0];
 
   const renderCell = useCallback((player: Output, columnKey: React.Key) => {
     const cellValue = player[columnKey as keyof Output];

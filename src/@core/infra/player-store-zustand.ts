@@ -1,6 +1,7 @@
-import { Player } from "@/@core/domain/player";
 import { createStore } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+
+import { Player } from "@/@core/domain/player";
 import { PlayerID } from "../domain/player-id";
 
 export class PlayerZustand {

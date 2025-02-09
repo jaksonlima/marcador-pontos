@@ -6,13 +6,15 @@ import { Input } from "@heroui/input";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-import { createPlayerUseCase } from "@/@core/infra/player-container";
+import { usePlayerUseCase } from "@/hooks/player-use-case";
 
 type CreatePlayerUseForm = {
   name: string;
 };
 
 export function Create() {
+  const { createPlayerUseCase } = usePlayerUseCase();
+
   const {
     register,
     handleSubmit,

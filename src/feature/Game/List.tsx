@@ -1,9 +1,11 @@
 "use client";
 
-import { findAllPlayerUseCase } from "@/@core/infra/player-container";
 import { CardRoot } from "./Card";
+import { usePlayerUseCase } from "@/hooks/player-use-case";
 
 export function List() {
+  const { findAllPlayerUseCase } = usePlayerUseCase();
+
   const players = findAllPlayerUseCase.execute({});
 
   return (

@@ -12,7 +12,7 @@ import {
   useDisclosure,
 } from "@heroui/modal";
 
-import { deletePlayerUseCase } from "@/@core/infra/player-container";
+import { usePlayerUseCase } from "@/hooks/player-use-case";
 
 interface DeleteProps extends PropsWithChildren {
   id: string;
@@ -20,6 +20,7 @@ interface DeleteProps extends PropsWithChildren {
 }
 
 export function Delete({ id, name }: DeleteProps) {
+  const { deletePlayerUseCase } = usePlayerUseCase();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
 

@@ -6,10 +6,7 @@ import { Form } from "@heroui/form";
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 
-import {
-  updatePlayerUseCase,
-  findByIdPlayerUseCase,
-} from "@/@core/infra/player-container";
+import { usePlayerUseCase } from "@/hooks/player-use-case";
 
 type UpdatePlayerUseForm = {
   name: string;
@@ -20,6 +17,7 @@ export function Update() {
   const params = useParams();
   const playerId = params.id as string;
 
+  const { findByIdPlayerUseCase, updatePlayerUseCase } = usePlayerUseCase();
   const player = findByIdPlayerUseCase.execute(playerId);
 
   const {
