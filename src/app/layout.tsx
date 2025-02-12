@@ -14,7 +14,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Marcador de Pontos - Jogo",
+  title: "Marcador de Pontos - Game",
   description: "Created By Jakson Lima",
 };
 
