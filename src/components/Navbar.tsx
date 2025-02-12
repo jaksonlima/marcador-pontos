@@ -14,11 +14,17 @@ import {
 import { Link } from "@heroui/link";
 import { Tooltip } from "@heroui/tooltip";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import { usePathname } from "next/navigation";
 
 export function AppNavbar() {
+  const pathname = usePathname();
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = ["Início", "Jogadores", "Histórico"];
+
+  const colorRoot = pathname === "/" ? "primary" : "foreground";
+  const colorPlayers = pathname.includes("/players") ? "primary" : "foreground";
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -36,13 +42,13 @@ export function AppNavbar() {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="/">
+        <NavbarItem isActive>
+          <Link aria-current="page" color={colorRoot} href="/">
             {menuItems[0]}
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link aria-current="page" href="/players">
+        <NavbarItem>
+          <Link color={colorPlayers} href="/players">
             {menuItems[1]}
           </Link>
         </NavbarItem>

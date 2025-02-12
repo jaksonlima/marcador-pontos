@@ -3,20 +3,8 @@ import { Card as CardUI, CardBody, CardFooter, CardHeader } from "@heroui/card";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import debounce from "lodash.debounce";
+
 import { usePlayerUseCase } from "@/hooks/player-use-case";
-
-// import React from "react";
-// import {
-//   Drawer,
-//   DrawerContent,
-//   DrawerHeader,
-//   DrawerBody,
-//   DrawerFooter,
-// } from "@heroui/drawer";
-// import { Button } from "@heroui/button";
-// import { useDisclosure } from "@heroui/use-disclosure";
-
-// import { updatePlayerUseCase } from "@/@core/infra/player-container";
 
 type CardProps = {
   id: string;
@@ -73,8 +61,6 @@ export function Card(player: CardProps) {
 
   return (
     <>
-      {/* <CardInputMobile open={true} /> */}
-
       <div
         tabIndex={0}
         onClick={() => {
@@ -161,50 +147,3 @@ export function CardRoot(player: CardProps) {
     </CardBorder>
   );
 }
-
-// function CardInputMobile({ open }: { open: boolean }) {
-//   console.log({ open });
-//   const { isOpen, onOpen, onOpenChange } = useDisclosure({ isOpen: open });
-
-//   return (
-//     <>
-//       <Drawer
-//         isOpen={isOpen}
-//         placement="bottom"
-//         backdrop="transparent"
-//         onOpenChange={onOpenChange}
-//       >
-//         <DrawerContent>
-//           {(onClose) => (
-//             <>
-//               <DrawerHeader className="flex flex-col gap-1">
-//                 Drawer Title
-//               </DrawerHeader>
-//               <DrawerBody>
-//                 <p>
-//                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-//                   Nullam pulvinar risus non risus hendrerit venenatis.
-//                   Pellentesque sit amet hendrerit risus, sed porttitor quam.
-//                 </p>
-//                 <p>
-//                   Magna exercitation reprehenderit magna aute tempor cupidatat
-//                   consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
-//                   incididunt cillum quis. Velit duis sit officia eiusmod Lorem
-//                   aliqua enim laboris do dolor eiusmod.
-//                 </p>
-//               </DrawerBody>
-//               <DrawerFooter>
-//                 <Button color="danger" variant="light" onPress={onClose}>
-//                   Close
-//                 </Button>
-//                 <Button color="primary" onPress={onClose}>
-//                   Action
-//                 </Button>
-//               </DrawerFooter>
-//             </>
-//           )}
-//         </DrawerContent>
-//       </Drawer>
-//     </>
-//   );
-// }

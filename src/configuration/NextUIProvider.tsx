@@ -9,7 +9,7 @@ export function AppNextUIProvider({ children }: React.PropsWithChildren) {
   const router = useRouter();
 
   return (
-    <HeroUIProvider navigate={router.push}>
+    <HeroUIProvider locale="pt-br" navigate={router.push}>
       <ThemeProvider attribute="class" defaultTheme="dark">
         {children}
       </ThemeProvider>
