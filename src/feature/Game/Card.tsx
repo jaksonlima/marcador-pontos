@@ -3,6 +3,7 @@ import { Card as CardUI, CardBody, CardFooter, CardHeader } from "@heroui/card";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import debounce from "lodash.debounce";
+import { usePlayerUseCase } from "@/hooks/player-use-case";
 
 // import React from "react";
 // import {
@@ -15,7 +16,7 @@ import debounce from "lodash.debounce";
 // import { Button } from "@heroui/button";
 // import { useDisclosure } from "@heroui/use-disclosure";
 
-import { updatePlayerUseCase } from "@/@core/infra/player-container";
+// import { updatePlayerUseCase } from "@/@core/infra/player-container";
 
 type CardProps = {
   id: string;
@@ -29,6 +30,8 @@ type CardFromProps = {
 
 export function Card(player: CardProps) {
   const [focus, set] = useState(false);
+
+  const { updatePlayerUseCase } = usePlayerUseCase();
 
   const { register, setFocus, watch, getValues } = useForm<CardFromProps>({
     values: { points: player.points },
@@ -44,7 +47,6 @@ export function Card(player: CardProps) {
   function updatePlayer() {
     try {
       const name = player.name;
-
       updatePlayerUseCase.execute({
         id: player.id,
         name: name,

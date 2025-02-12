@@ -5,7 +5,11 @@ import { PlayerStore, PlayerZustand } from "./player-store-zustand";
 import { PlayerQuery } from "../domain/player-query";
 
 export class PlayerStoreGateway implements PlayerGateway {
-  constructor(private playerStore: PlayerStore) {}
+  private readonly playerStore: PlayerStore;
+
+  constructor({ playerStore }: { playerStore: PlayerStore }) {
+    this.playerStore = playerStore;
+  }
 
   create(player: Player): Player {
     this.playerStore.create(PlayerZustand.from(player));

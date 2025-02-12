@@ -3,7 +3,11 @@ import { PlayerGateway } from "../../domain/player-gateway";
 import { UseCase } from "../use-case";
 
 export class FindAllPlayerUseCase implements UseCase<PlayerQuery, Output[]> {
-  constructor(private readonly playerGateway: PlayerGateway) {}
+  private readonly playerGateway: PlayerGateway;
+
+  constructor({ playerGateway }: { playerGateway: PlayerGateway }) {
+    this.playerGateway = playerGateway;
+  }
 
   execute(aQuery: PlayerQuery): Output[] {
     const result = this.playerGateway.findAll(aQuery);

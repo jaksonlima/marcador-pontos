@@ -3,7 +3,11 @@ import { PlayerID } from "../../domain/player-id";
 import { UseCase } from "../use-case";
 
 export class FindByIdPlayerUseCase implements UseCase<string, Output> {
-  constructor(private readonly playerGateway: PlayerGateway) {}
+  private readonly playerGateway: PlayerGateway;
+
+  constructor({ playerGateway }: { playerGateway: PlayerGateway }) {
+    this.playerGateway = playerGateway;
+  }
 
   execute(anId: string): Output {
     const result = this.playerGateway.findById(PlayerID.with(anId));

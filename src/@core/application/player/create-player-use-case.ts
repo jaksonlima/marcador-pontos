@@ -3,7 +3,11 @@ import { PlayerGateway } from "../../domain/player-gateway";
 import { UseCase } from "../use-case";
 
 export class CreatePlayerUseCase implements UseCase<Input, Output> {
-  constructor(private readonly playerGateway: PlayerGateway) {}
+  private readonly playerGateway: PlayerGateway;
+
+  constructor({ playerGateway }: { playerGateway: PlayerGateway }) {
+    this.playerGateway = playerGateway;
+  }
 
   execute(anIn: Input): Output {
     const inputName = anIn.name;

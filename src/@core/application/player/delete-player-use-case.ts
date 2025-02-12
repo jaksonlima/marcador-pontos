@@ -3,7 +3,11 @@ import { PlayerID } from "../../domain/player-id";
 import { UnitUseCase } from "../unit-use-case";
 
 export class DeletePlayerUseCase implements UnitUseCase<string> {
-  constructor(private readonly playerGateway: PlayerGateway) {}
+  private readonly playerGateway: PlayerGateway;
+
+  constructor({ playerGateway }: { playerGateway: PlayerGateway }) {
+    this.playerGateway = playerGateway;
+  }
 
   execute(anId: string): void {
     const playerId = PlayerID.with(anId);

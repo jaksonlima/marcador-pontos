@@ -12,12 +12,12 @@ const container = createContainer();
 
 container.register({
   playerStore: asValue(playerStore.getState()),
-  playerGateway: asClass(PlayerStoreGateway).singleton().classic(),
-  createPlayerUseCase: asClass(CreatePlayerUseCase).singleton().classic(),
-  updatePlayerUseCase: asClass(UpdatePlayerUseCase).singleton().classic(),
-  deletePlayerUseCase: asClass(DeletePlayerUseCase).singleton().classic(),
-  findByIdPlayerUseCase: asClass(FindByIdPlayerUseCase).singleton().classic(),
-  findAllPlayerUseCase: asClass(FindAllPlayerUseCase).singleton().classic(),
+  playerGateway: asClass(PlayerStoreGateway).singleton(),
+  createPlayerUseCase: asClass(CreatePlayerUseCase).singleton(),
+  updatePlayerUseCase: asClass(UpdatePlayerUseCase).singleton(),
+  deletePlayerUseCase: asClass(DeletePlayerUseCase).singleton(),
+  findByIdPlayerUseCase: asClass(FindByIdPlayerUseCase).singleton(),
+  findAllPlayerUseCase: asClass(FindAllPlayerUseCase).singleton(),
 });
 
 export const createPlayerUseCase = container.resolve<CreatePlayerUseCase>(
