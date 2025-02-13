@@ -16,15 +16,28 @@ import { Tooltip } from "@heroui/tooltip";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { usePathname } from "next/navigation";
 
+const menuItems = [
+  { path: "/", exec: true, title: "Início" },
+  { path: "/players", exec: false, title: "Jogadores" },
+  { path: "#", exec: false, title: "Histórico" },
+];
+
 export function AppNavbar() {
   const pathname = usePathname();
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuItems = ["Início", "Jogadores", "Histórico"];
+  const onHandleColor = (path: string, exec?: boolean) => {
+    if (!exec && pathname.includes(path)) {
+      return "primary";
+    }
 
-  const colorRoot = pathname === "/" ? "primary" : "foreground";
-  const colorPlayers = pathname.includes("/players") ? "primary" : "foreground";
+    if (exec && pathname === path) {
+      return "primary";
+    }
+
+    return "foreground";
+  };
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -42,21 +55,19 @@ export function AppNavbar() {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem isActive>
-          <Link aria-current="page" color={colorRoot} href="/">
-            {menuItems[0]}
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color={colorPlayers} href="/players">
-            {menuItems[1]}
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            {menuItems[2]}
-          </Link>
-        </NavbarItem>
+        {menuItems.map((item) => (
+          <>
+            <NavbarItem>
+              <Link
+                aria-current="page"
+                color={onHandleColor(item.path, item.exec)}
+                href={item.path}
+              >
+                {item.title}
+              </Link>
+            </NavbarItem>
+          </>
+        ))}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
@@ -66,20 +77,14 @@ export function AppNavbar() {
 
       <NavbarMenu>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+          <NavbarMenuItem key={`${item.path}-${index}`}>
             <Link
               className="w-full"
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              href="#"
+              color={onHandleColor(item.path, item.exec)}
+              href={item.path}
               size="lg"
             >
-              {item}
+              {item.title}
             </Link>
           </NavbarMenuItem>
         ))}
