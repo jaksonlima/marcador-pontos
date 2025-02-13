@@ -58,11 +58,9 @@ export function List() {
     <>
       <div className="place-items-center m-1">
         <div className="flex flex-col items-end gap-4 w-full max-w-xl">
-          <Link href="/players/create">
-            <Button isIconOnly aria-label="Like">
-              <CirclePlus />
-            </Button>
-          </Link>
+          <Button isIconOnly size="lg" as={Link} href="/players/create">
+            <CirclePlus size={28} />
+          </Button>
           <Table aria-label="Example table with custom cells">
             <TableHeader columns={columns}>
               {(column) => (

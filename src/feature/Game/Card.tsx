@@ -74,7 +74,7 @@ export function Card(player: CardProps) {
               onChange: handleChange,
               onBlur: handleBlur,
             })}
-            type="text"
+            type="number"
             className="opacity-0 inset-0 absolute"
           />
         </div>

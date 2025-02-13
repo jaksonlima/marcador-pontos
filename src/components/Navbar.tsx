@@ -55,18 +55,16 @@ export function AppNavbar() {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        {menuItems.map((item) => (
-          <>
-            <NavbarItem>
-              <Link
-                aria-current="page"
-                color={onHandleColor(item.path, item.exec)}
-                href={item.path}
-              >
-                {item.title}
-              </Link>
-            </NavbarItem>
-          </>
+        {menuItems.map((item, index) => (
+          <NavbarItem key={`${item.path}-${index}`}>
+            <Link
+              aria-current="page"
+              color={onHandleColor(item.path, item.exec)}
+              href={item.path}
+            >
+              {item.title}
+            </Link>
+          </NavbarItem>
         ))}
       </NavbarContent>
       <NavbarContent justify="end">

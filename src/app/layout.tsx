@@ -7,6 +7,7 @@ import { AppNavbar } from "@/components/Navbar";
 import { AppNextUIProvider } from "@/configuration/NextUIProvider";
 import { AppToastContainer } from "@/configuration/ToastContainer";
 import { UseCaseProvider } from "@/hooks/provider-use-case";
+import { Layout } from "@/components/Layout";
 
 const roboto = Roboto({
   weight: "700",
@@ -29,7 +30,9 @@ export default function RootLayout({
         <AppNextUIProvider>
           <AppNavbar />
           <AppToastContainer />
-          <UseCaseProvider>{children}</UseCaseProvider>
+          <UseCaseProvider>
+            <Layout>{children}</Layout>
+          </UseCaseProvider>
         </AppNextUIProvider>
       </body>
     </html>
